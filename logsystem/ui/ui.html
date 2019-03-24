@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Logs system - by n0thus</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/searchBar.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:900" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <script src="js/render.js" type="text/javascript"></script>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="content" class="hidden">
+      <div class="top">
+        <h1>logs <span>system</span></h1>
+
+
+        <div id="research">
+				     <input type="text" id="searchTerm" placeholder="Search with tag (player name, steam hexa...)">
+				</div>
+
+        <button type="button" name="close" onclick="closeMenu();"><i class="far fa-times-circle"></i></button>
+      </div>
+      <div class="left">
+        <ul>
+          <li onclick="renderConnections();"><i class="fas fa-plug"></i> Connections</li>
+          <li onclick="renderKills();"><i class="fas fa-book-dead"></i> Kills</li>
+          <li onclick="renderVehicles();"><i class="fas fa-car"></i> Vehicles</li>
+          <li onclick="renderWeapons();"><i class="fas fa-rocket"></i> Weapons</li>
+        </ul>
+      </div>
+
+
+
+
+
+      <div class="logs">
+      </div>
+
+    </div>
+  </body>
+</html>

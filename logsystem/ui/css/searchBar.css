@@ -1,0 +1,14 @@
+#research {
+  height: 2vh;
+  width: 28%;
+}
+
+#research #searchTerm {
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  border: 2px rgb(194, 49, 54) solid;
+
+  padding-left: 5%;
+  padding-right: 5%;
+}
