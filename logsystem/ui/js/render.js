@@ -12,7 +12,7 @@ function renderConnections(search) {
   currentMenu = 1;
 
 
-  for (var i = connections.length-1; i > 0; i--) {
+  for (var i = connections.length-1; i >= 0; i--) {
     let log = connections[i];
     if(search==null || log.name.toLowerCase().includes(search) || log.steamID.toLowerCase().includes(search)) {
       let html = '<div class="item">'
@@ -35,7 +35,7 @@ function renderKills(search) {
   currentMenu = 2;
 
 
-  for (var i = kills.length-1; i > 0; i--) {
+  for (var i = kills.length-1; i >= 0; i--) {
     let log = kills[i];
 
     if(search==null || log.name.toLowerCase().includes(search) || log.steamID.toLowerCase().includes(search) || log.target.toLowerCase().includes(search)) {
@@ -60,7 +60,7 @@ function renderVehicles(search) {
   currentMenu = 3;
 
 
-  for (var i = vehicles.length-1; i > 0; i--) {
+  for (var i = vehicles.length-1; i >= 0; i--) {
     let log = vehicles[i];
     if(search==null || log.name.toLowerCase().includes(search) || log.steamID.toLowerCase().includes(search) || log.target.toLowerCase().includes(search)) {
       let html = '<div class="item">'
@@ -83,7 +83,7 @@ function renderWeapons(search) {
   currentMenu = 4;
 
 
-  for (var i = weapons.length-1; i > 0; i--) {
+  for (var i = weapons.length-1; i >= 0; i--) {
     let log = weapons[i];
 
     if(search==null || log.name.toLowerCase().includes(search) || log.steamID.toLowerCase().includes(search) || log.target.toLowerCase().includes(search)) {

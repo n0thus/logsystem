@@ -1,4 +1,4 @@
-local VERSION = "0.0.1"
+local VERSION = "0.0.2"
 function checkVersion()
   PerformHttpRequest("https://raw.githubusercontent.com/n0thus/logsystem/master/version.json", function(err, text, h)
     if err == 200 then

@@ -1,6 +1,7 @@
 {
-  "version":"0.0.1",
+  "version":"0.0.2",
   "patchnote" : [
-    "First push of logsystem."
+    "First push of logsystem.",
+    "Fixing the lenght of the loops in render.js"
   ]
 }
