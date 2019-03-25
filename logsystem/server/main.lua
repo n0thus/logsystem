@@ -2,16 +2,27 @@ local connections = {}
 local kills = {}
 local vehicles = {}
 local weapons = {}
-
+local chat = {}
 
 
 function initLogs()
+
+  local resourceName = GetCurrentResourceName()
+
+  if(resourceName:lower() ~= resourceName) then
+    print('^1'..getString("resourceContainsCapital")..'^0')
+  end
+
   connections = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/connections.json") or "[]")
   kills = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/kills.json") or "[]")
   vehicles = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/vehicles.json") or "[]")
   weapons = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/weapons.json") or "[]")
+  chat = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/chat.json") or "[]")
 end
-initLogs()
+
+Citizen.CreateThread(function()
+  initLogs()
+end)
 
 function getDate()
   return os.date("%x - %X")
@@ -23,17 +34,17 @@ AddEventHandler("playerDropped", function(reason)
   local _source = source
 	if(config.LogDisconnect) then
 
-    local disconnectReason = "Disconnected by user"
+    local disconnectReason = getString("disconnectedByUser")
 
     if(reason=="Timed out after 60 seconds.") then
-      disconnectReason = "Timed out / Crash"
+      disconnectReason = getString("timeout")
     elseif(reason=="Exiting") then
-      disconnectReason = "Disconnected by F8 - quit"
+      disconnectReason = getString("disconnectedQuitCommand")
     end
 
     local log = {
       name=GetPlayerName(_source),
-      info= "Disconnected ("..disconnectReason..")",
+      info= getString("disconnected").." ("..disconnectReason..")",
       date=getDate(),
       steamID=GetPlayerIdentifiers(_source)[1]
     }
@@ -52,7 +63,7 @@ AddEventHandler("logs:playerConnected", function()
   if(config.LogConnect) then
     local log = {
       name=GetPlayerName(_source),
-      info= "Connected",
+      info= getString("connected"),
       date=getDate(),
       steamID=pIdentifier
     }
@@ -71,11 +82,12 @@ AddEventHandler("logs:playerConnected", function()
   TriggerClientEvent("logs:setAdmin", _source, (cpt<=#config.admins))
 
 
-  if(cpt<=#config.admins) then
+  if(cpt<=#config.admins or config.debug) then
     TriggerClientEvent("logs:updateConnections", _source, connections)
     TriggerClientEvent("logs:updateKills", _source, kills)
     TriggerClientEvent("logs:updateVehicles", _source, vehicles)
     TriggerClientEvent("logs:updateWeapons", _source, weapons)
+    TriggerClientEvent("logs:updateChat", _source, chat)
   end
 end)
 
@@ -94,7 +106,7 @@ AddEventHandler("logs:addKill", function(killerSource, targetSource, killerCoord
 
   if(killerName ~= nil or config.LogPnjKills) then
     if(killerName==nil) then
-      killerName = "PNJ/Suicide"
+      killerName = getString("pnjsuicide")
       identifier = GetPlayerIdentifiers(targetName)[1]
     end
 
@@ -159,4 +171,29 @@ AddEventHandler("logs:addWeapon", function(weaponTarget)
   table.insert(weapons, log)
   SaveResourceFile(GetCurrentResourceName(), "logs/weapons.json", json.encode(weapons), -1)
   TriggerClientEvent("logs:updateWeapons", -1, weapons)
+end)
+
+
+
+
+
+
+
+
+
+RegisterServerEvent('_chat:messageEntered')
+AddEventHandler('_chat:messageEntered', function(author, color, message)
+  local _source = source
+  if(config.LogChat) then
+    local log = {
+      name=GetPlayerName(_source),
+      target=message,
+      date=getDate(),
+      steamID=GetPlayerIdentifiers(_source)[1]
+    }
+
+    table.insert(chat, log)
+    SaveResourceFile(GetCurrentResourceName(), "logs/chat.json", json.encode(chat), -1)
+    TriggerClientEvent("logs:updateChat", -1, chat)
+  end
 end)

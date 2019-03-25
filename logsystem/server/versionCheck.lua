@@ -13,14 +13,14 @@ function checkVersion()
           patchnote = patchnote.."- "..line.."\n"
         end
 
-        print("A newest version of logsystem is available ("..gitVersion..")")
+        print(getString("newestVersion", {["%newVersion%"]=gitVersion}))
         print(patchnote)
         print("\n=================================^0\n")
       else
-        print("^2logsystem up to date !^0")
+        print("^2"..getString("upToDate").."^0")
       end
     else
-      print("^1logsystem : Verification of the version failed^0")
+      print("^1"..getString("verificationError").."^0")
     end
   end, "GET")
 end

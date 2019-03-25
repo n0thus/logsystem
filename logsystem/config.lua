@@ -1,9 +1,12 @@
 config = {
   debug = false,
+  language = 'en',
   autoCheckVersion = true,
 
   LogDisconnect = true,
   LogConnect = true,
+
+  LogChat = true,
 
   LogKills = true, -- Log when a player kill an other player.
 	LogPnjKills = true, -- Log when a player has been killed by a pnj.
