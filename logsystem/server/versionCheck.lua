@@ -1,4 +1,4 @@
-local VERSION = "0.0.2"
+local VERSION = "0.0.3"
 function checkVersion()
   PerformHttpRequest("https://raw.githubusercontent.com/n0thus/logsystem/master/version.json", function(err, text, h)
     if err == 200 then
@@ -13,7 +13,7 @@ function checkVersion()
           patchnote = patchnote.."- "..line.."\n"
         end
 
-        print(getString("newestVersion", {["%newVersion%"]=gitVersion}))
+        print(getString("newestVersion", {["#newVersion#"]=gitVersion}))
         print(patchnote)
         print("\n=================================^0\n")
       else

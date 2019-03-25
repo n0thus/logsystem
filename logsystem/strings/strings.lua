@@ -14,7 +14,7 @@ local strings = {
 
 
     resourceContainsCapital = "The resource name for logsystem contains capital letters. It will cause some issues with the UI.",
-    newestVersion = "A newest version of logsystem is available (%newVersion%)",
+    newestVersion = "A newest version of logsystem is available (#newVersion#)",
     upToDate = "logsystem up to date !",
     verificationError = "logsystem : Verification of the version failed"
   },
@@ -34,7 +34,7 @@ local strings = {
 
 
     resourceContainsCapital = "Le nom de la resource pour logsystem contient des majuscules. Cela causera des problemes avec l'interface.",
-    newestVersion = "Une nouvelle version du logsystem est disponible (%newVersion%)",
+    newestVersion = "Une nouvelle version du logsystem est disponible (#newVersion#)",
     upToDate = "logsystem a jour !",
     verificationError = "logsystem : La verification de la version a echouee"
   }
@@ -53,6 +53,3 @@ function getString(stringId, replaceArgs)
 
   return askedString
 end
-
-
-print("esfsderfsefdsf")
