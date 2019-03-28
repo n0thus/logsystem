@@ -21,6 +21,7 @@ ui_page('ui/ui.html')
 files({
   'ui/ui.html',
   'ui/css/style.css',
+  'ui/css/darkmode.css',
   'ui/css/searchBar.css',
   'ui/js/render.js'
 })

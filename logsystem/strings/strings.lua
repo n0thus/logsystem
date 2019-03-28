@@ -37,6 +37,26 @@ local strings = {
     newestVersion = "Une nouvelle version du logsystem est disponible (#newVersion#)",
     upToDate = "logsystem a jour !",
     verificationError = "logsystem : La verification de la version a echouee"
+  },
+
+  br = {
+    connected = "Conectado",
+    disconnected = "Desconectado",
+    disconnectedByUser = "Desconectado por usar",
+    timeout = "Timed out / Crash",
+    disconnectedQuitCommand = "Desconectado usando F8 - quit",
+
+    pnjsuicide = "PNJ/Suicidio",
+    killercoords = "Morreu local",
+    targetcoords = "Alvo local",
+
+    localisation = "Localização",
+
+
+    resourceContainsCapital = "O nome do recurso para o sistema de logs contém letras maiúsculas. Isso causará alguns problemas com a interface do usuário.",
+    newestVersion = "Uma versão mais recente do sistema de logs está disponível (#newVersion#)",
+    upToDate = "Sistema de logs atualizado !",
+    verificationError = "logsystem : A verificação da versão falhou"
   }
 }
 

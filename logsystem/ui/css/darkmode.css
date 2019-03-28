@@ -1,0 +1,166 @@
+
+.toggleDarkmode {
+  animation: toggleDarkmode 2s;
+}
+.toggleDarkmodeLogs {
+  animation: toggleDarkmodeLogs 2s;
+  background-color: rgb(82, 72, 72);
+}
+
+
+#content.toggleDarkmode {
+  background-color: rgb(28, 28, 28);
+  border: 2px rgb(28, 28, 28) solid;
+}
+#content .logs.toggleDarkmodeLogs {
+  background-color: rgb(82, 72, 72);
+}
+
+#content.toggleDarkmode #research #searchTerm {
+  animation: toggleDarkmodeInput 2s;
+  background-color: rgb(82, 72, 72);
+  color: rgb(215, 215, 215);
+}
+
+#content.toggleDarkmode .top button[name="darkMode"] {
+  animation: toggleDarkmodeButton 2s;
+  color: rgb(210, 158, 40);
+  border-color: rgb(210, 158, 40);
+  background-color: rgb(28, 28, 28);
+}
+
+#content.toggleDarkmode .logs .item p {
+  color: rgb(203, 203, 203);
+}
+
+
+@keyframes toggleDarkmode {
+  from {
+    background-color: rgb(130, 130, 130);
+    border: 2px rgb(130, 130, 130) solid;
+  }
+  to {
+    background-color: rgb(28, 28, 28);
+    border: 2px rgb(28, 28, 28) solid;
+  }
+}
+
+
+
+@keyframes toggleDarkmodeLogs {
+  from {
+    background-color: rgb(246, 246, 246);
+  }
+  to {
+    background-color: rgb(82, 72, 72);
+  }
+}
+
+
+@keyframes toggleDarkmodeInput {
+  from {
+    background-color: #FFF;
+    color: #000;
+  }
+  to {
+    background-color: rgb(82, 72, 72);
+    color: rgb(215, 215, 215);
+  }
+}
+
+
+@keyframes toggleDarkmodeButton {
+  from {
+    border: 1px #FFF solid;
+    color: white;
+    background-color: rgb(130, 130, 130);
+  }
+  to {
+    color: rgb(210, 158, 40);
+    border-color: rgb(210, 158, 40);
+    background-color: rgb(28, 28, 28);
+  }
+}
+
+
+
+
+
+
+.toggleLightmode {
+  animation: toggleLightmode 2s;
+}
+.toggleLightmodeLogs {
+  animation: toggleLightmodeLogs 2s;
+  background-color: rgb(82, 72, 72);
+}
+
+
+#content.toggleLightmode {
+  background-color: rgb(130, 130, 130);
+  border: 2px rgb(130, 130, 130) solid;
+}
+#content .logs.toggleLightmodeLogs {
+  background-color: rgb(246, 246, 246);
+}
+
+#content.toggleLightmode #research #searchTerm {
+  animation: toggleLightmodeInput 2s;
+  background-color: #FFF;
+  color: #000;
+}
+
+#content.toggleLightmode .top button[name="darkMode"] {
+  animation: toggleLightmodeButton 2s;
+  border: 1px #FFF solid;
+  color: white;
+  background-color: rgb(130, 130, 130);
+}
+
+@keyframes toggleLightmode {
+  from {
+    background-color: rgb(28, 28, 28);
+    border: 2px rgb(28, 28, 28) solid;
+  }
+  to {
+    background-color: rgb(130, 130, 130);
+    border: 2px rgb(130, 130, 130) solid;
+  }
+}
+
+
+
+@keyframes toggleLightmodeLogs {
+  from {
+    background-color: rgb(82, 72, 72);
+  }
+  to {
+    background-color: rgb(246, 246, 246);
+  }
+}
+
+
+@keyframes toggleLightmodeInput {
+  from {
+    background-color: rgb(82, 72, 72);
+    color: rgb(215, 215, 215);
+  }
+  to {
+    background-color: #FFF;
+    color: #000;
+  }
+}
+
+
+@keyframes toggleLightmodeButton {
+  from {
+    color: rgb(210, 158, 40);
+    border-color: rgb(210, 158, 40);
+    background-color: rgb(28, 28, 28);
+  }
+  to {
+    border: 1px #FFF solid;
+    color: white;
+    background-color: rgb(130, 130, 130);
+  }
+}

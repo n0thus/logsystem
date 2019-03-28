@@ -66,7 +66,7 @@ body {
   right: 15%;
 }
 
-#content .top button {
+#content .top button[name="close"] {
   position: absolute;
   top: -2px;
   right: -2px;
@@ -87,6 +87,23 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+#content .top button[name="darkMode"] {
+  height: 2.5vh;
+  width: 2.5vh;
+
+  position: absolute;
+  right: 7%;
+
+  border-radius: 300px;
+  border: 1px #FFF solid;
+
+  color: white;
+  background-color: rgb(130, 130, 130);
+
+  cursor: pointer;
+}
+
 
 
 

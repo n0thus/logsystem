@@ -8,6 +8,7 @@ var chat = [];
 
 var currentMenu = 1;
 var strings = {};
+let darkmode = false;
 
 function renderConnections(search) {
   let container = $(".logs");
@@ -125,6 +126,23 @@ function renderChat(search) {
   }
 }
 
+function toggleDarkmode() {
+  darkmode = !darkmode;
+
+  if(darkmode) {
+    $("button[name='darkMode']").html('<i class="fas fa-lightbulb"></i>');
+    $("#content").removeClass("toggleLightmode");
+    $(".logs").removeClass("toggleLightmodeLogs");
+    $("#content").addClass("toggleDarkmode");
+    $(".logs").addClass("toggleDarkmodeLogs");
+  }else {
+    $("button[name='darkMode']").html('<i class="far fa-lightbulb"></i>');
+    $("#content").removeClass("toggleDarkmode");
+    $(".logs").removeClass("toggleDarkmodeLogs");
+    $("#content").addClass("toggleLightmode");
+    $(".logs").addClass("toggleLightmodeLogs");
+  }
+}
 
 
 

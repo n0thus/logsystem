@@ -177,17 +177,14 @@ end)
 
 
 
-
-
-
-
-RegisterServerEvent('_chat:messageEntered')
-AddEventHandler('_chat:messageEntered', function(author, color, message)
+RegisterServerEvent("logs:logChat")
+AddEventHandler("logs:logChat", function(command)
   local _source = source
+
   if(config.LogChat) then
     local log = {
       name=GetPlayerName(_source),
-      target=message,
+      target=command,
       date=getDate(),
       steamID=GetPlayerIdentifiers(_source)[1]
     }
