@@ -1,9 +1,8 @@
 {
-  "version":"0.0.3",
+  "version":"0.0.4",
   "patchnote" : [
-    "Fixing UI issues.",
-    "Allowing to rename the script",
-    "Adding chat logs",
-    "Adding more configurable things (strings/strings.lua)"
+    "Added darkmode in the UI.",
+    "Added command logs (have to change the chat resource)",
+    "Added Brazilian language thanks to Sattagames"
   ]
 }
