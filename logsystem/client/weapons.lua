@@ -98,15 +98,15 @@ Citizen.CreateThread(function()
 
   if(config.LogWhenHaveBlackListedGun) then
   	while true do
-  		Citizen.Wait(1)
-
+			local playerPed = PlayerPedId()
   		for _,k in pairs(config.blacklistedGuns) do
-  			if(HasPedGotWeapon(PlayerPedId(), k, false) == 1) then
+  			if(HasPedGotWeapon(playerPed, k, false) == 1) then
   				TriggerServerEvent("logs:addWeapon", weapons[k])
   				if(config.DeleteBlackListedGun) then
-  					RemoveWeaponFromPed(PlayerPedId(), k)
+  					RemoveWeaponFromPed(playerPed, k)
   				end
   			end
+				Citizen.Wait(5)
   		end
   		Citizen.Wait(5000)
   	end

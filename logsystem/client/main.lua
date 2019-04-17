@@ -38,8 +38,6 @@ Citizen.CreateThread(function()
 
   while true do
     Citizen.Wait(1)
-    NetworkSetFriendlyFireOption(true)
-    SetCanAttackFriendly(PlayerPedId(), true, true)
 
     if(IsControlJustPressed(1, config.openMenuKey) and (isAdmin or config.debug)) then
       SetNuiFocus(true, true)
@@ -70,40 +68,44 @@ function round(num, numDecimalPlaces)
 end
 
 
-
 RegisterNetEvent("logs:setAdmin")
 AddEventHandler("logs:setAdmin", function(admin)
   isAdmin = admin
 end)
 
-
 RegisterNetEvent("logs:updateConnections")
 AddEventHandler("logs:updateConnections", function(newArray)
-  if(isAdmin or config.debug) then
-    connections = newArray
-  end
+  local array = json.decode(newArray)
+  table.insert(connections, array)
 end)
+
 RegisterNetEvent("logs:updateKills")
 AddEventHandler("logs:updateKills", function(newArray)
-  if(isAdmin or config.debug) then
-    kills = newArray
-  end
+  local array = json.decode(newArray)
+  table.insert(kills, array)
 end)
 RegisterNetEvent("logs:updateVehicles")
 AddEventHandler("logs:updateVehicles", function(newArray)
-  if(isAdmin or config.debug) then
-    vehicles = newArray
-  end
+  local array = json.decode(newArray)
+  table.insert(vehicles, array)
 end)
 RegisterNetEvent("logs:updateWeapons")
 AddEventHandler("logs:updateWeapons", function(newArray)
-  if(isAdmin or config.debug) then
-    weapons = newArray
-  end
+  local array = json.decode(newArray)
+  table.insert(weapons, array)
 end)
 RegisterNetEvent("logs:updateChat")
 AddEventHandler("logs:updateChat", function(newArray)
-  if(isAdmin or config.debug) then
-    chat = newArray
-  end
+  local array = json.decode(newArray)
+  table.insert(chat, array)
+end)
+
+
+RegisterNetEvent("logs:init")
+AddEventHandler("logs:init", function(connectionsArray, killsArray, vehiclesArray, weaponsArray, chatArray)
+  connections = json.decode(connectionsArray)
+  kills       = json.decode(killsArray)
+  vehicles    = json.decode(vehiclesArray)
+  weapons     = json.decode(weaponsArray)
+  chat        = json.decode(chatArray)
 end)

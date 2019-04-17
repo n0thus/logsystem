@@ -5,6 +5,10 @@ local weapons = {}
 local chat = {}
 
 
+local connectedAdmins = {}
+
+
+
 function initLogs()
 
   local resourceName = GetCurrentResourceName()
@@ -12,6 +16,7 @@ function initLogs()
   if(resourceName:lower() ~= resourceName) then
     print('^1'..getString("resourceContainsCapital")..'^0')
   end
+
 
   connections = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/connections.json") or "[]")
   kills = json.decode(LoadResourceFile(GetCurrentResourceName(), "logs/kills.json") or "[]")
@@ -32,6 +37,17 @@ end
 
 AddEventHandler("playerDropped", function(reason)
   local _source = source
+
+  local cpt=1
+  while(cpt<=#connectedAdmins and (connectedAdmins[cpt] ~= _source)) do
+    cpt=cpt+1
+  end
+
+  if(cpt<=#connectedAdmins) then
+    table.remove(connectedAdmins, cpt)
+  end
+
+
 	if(config.LogDisconnect) then
 
     local disconnectReason = getString("disconnectedByUser")
@@ -51,7 +67,11 @@ AddEventHandler("playerDropped", function(reason)
 
     table.insert(connections, log)
     SaveResourceFile(GetCurrentResourceName(), "logs/connections.json", json.encode(connections), -1)
-    TriggerClientEvent("logs:updateConnections", -1, connections)
+
+    local encodedLog = json.encode(log)
+    for _,adminSource in pairs(connectedAdmins) do
+      TriggerClientEvent("logs:updateConnections", adminSource, encodedLog)
+    end
 	end
 end)
 
@@ -60,6 +80,28 @@ RegisterServerEvent("logs:playerConnected")
 AddEventHandler("logs:playerConnected", function()
   local _source = source
   local pIdentifier = GetPlayerIdentifiers(_source)[1]
+
+  local cpt=1
+  while(cpt<=#config.admins and (config.admins[cpt]:lower() ~= pIdentifier:lower())) do
+    cpt=cpt+1
+  end
+
+  TriggerClientEvent("logs:setAdmin", _source, cpt<=#config.admins)
+
+  if(cpt<=#config.admins or config.debug) then
+    table.insert(connectedAdmins, _source)
+
+    local connectionsArray = json.encode(connections)
+    local killsArray       = json.encode(kills)
+    local vehiclesArray    = json.encode(vehicles)
+    local weaponsArray     = json.encode(weapons)
+    local chatArray        = json.encode(chat)
+
+    TriggerClientEvent("logs:init", _source, connectionsArray, killsArray, vehiclesArray, weaponsArray, chatArray)
+  end
+
+
+
   if(config.LogConnect) then
     local log = {
       name=GetPlayerName(_source),
@@ -70,24 +112,10 @@ AddEventHandler("logs:playerConnected", function()
 
     table.insert(connections, log)
     SaveResourceFile(GetCurrentResourceName(), "logs/connections.json", json.encode(connections), -1)
-    TriggerClientEvent("logs:updateConnections", -1, connections)
-  end
-
-
-  local cpt=1
-  while(cpt<=#config.admins and (config.admins[cpt]:lower() ~= pIdentifier:lower())) do
-    cpt=cpt+1
-  end
-
-  TriggerClientEvent("logs:setAdmin", _source, (cpt<=#config.admins))
-
-
-  if(cpt<=#config.admins or config.debug) then
-    TriggerClientEvent("logs:updateConnections", _source, connections)
-    TriggerClientEvent("logs:updateKills", _source, kills)
-    TriggerClientEvent("logs:updateVehicles", _source, vehicles)
-    TriggerClientEvent("logs:updateWeapons", _source, weapons)
-    TriggerClientEvent("logs:updateChat", _source, chat)
+    local encodedLog = json.encode(log)
+    for _,adminSource in pairs(connectedAdmins) do
+      TriggerClientEvent("logs:updateConnections", adminSource, encodedLog)
+    end
   end
 end)
 
@@ -121,7 +149,10 @@ AddEventHandler("logs:addKill", function(killerSource, targetSource, killerCoord
 
     table.insert(kills, log)
     SaveResourceFile(GetCurrentResourceName(), "logs/kills.json", json.encode(kills), -1)
-    TriggerClientEvent("logs:updateKills", -1, kills)
+    local encodedLog = json.encode(log)
+    for _,adminSource in pairs(connectedAdmins) do
+      TriggerClientEvent("logs:updateKills", adminSource, encodedLog)
+    end
   end
 end)
 
@@ -147,7 +178,10 @@ AddEventHandler("logs:addVehicle", function(vehicleTarget, coords)
 
   table.insert(vehicles, log)
   SaveResourceFile(GetCurrentResourceName(), "logs/vehicles.json", json.encode(vehicles), -1)
-  TriggerClientEvent("logs:updateVehicles", -1, vehicles)
+  local encodedLog = json.encode(log)
+  for _,adminSource in pairs(connectedAdmins) do
+    TriggerClientEvent("logs:updateVehicles", adminSource, encodedLog)
+  end
 end)
 
 
@@ -170,7 +204,10 @@ AddEventHandler("logs:addWeapon", function(weaponTarget)
 
   table.insert(weapons, log)
   SaveResourceFile(GetCurrentResourceName(), "logs/weapons.json", json.encode(weapons), -1)
-  TriggerClientEvent("logs:updateWeapons", -1, weapons)
+  local encodedLog = json.encode(log)
+  for _,adminSource in pairs(connectedAdmins) do
+    TriggerClientEvent("logs:updateWeapons", adminSource, encodedLog)
+  end
 end)
 
 
@@ -191,6 +228,9 @@ AddEventHandler("logs:logChat", function(command)
 
     table.insert(chat, log)
     SaveResourceFile(GetCurrentResourceName(), "logs/chat.json", json.encode(chat), -1)
-    TriggerClientEvent("logs:updateChat", -1, chat)
+    local encodedLog = json.encode(log)
+    for _,adminSource in pairs(connectedAdmins) do
+      TriggerClientEvent("logs:updateChat", adminSource, encodedLog)
+    end
   end
 end)

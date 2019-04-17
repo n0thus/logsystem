@@ -1,39 +1,53 @@
 
 Citizen.CreateThread(function()
   if(config.LogPnjKills or config.LogKills) then
-    local isDead = false
+    local wasDead = false
 
     while true do
-      Wait(1)
+      Wait(50)
 
       local player = PlayerId()
 
       if NetworkIsPlayerActive(player) then
+
         local ped = PlayerPedId()
+        local isDead = IsPedFatallyInjured(ped)
 
-        if IsPedFatallyInjured(ped) and not isDead then
-          isDead = true
+        if(isDead) then
+          if(not wasDead) then
+            wasDead = true
 
-          local killer, killerweapon = NetworkGetEntityKillerOfPlayer(player)
-    			local killerentitytype = GetEntityType(killer)
-    			local killertype = -1
+            local killer, killerweapon = NetworkGetEntityKillerOfPlayer(player)
+      			local killerentitytype = GetEntityType(killer)
+      			local killertype = -1
 
 
-    			local killerid = GetPlayerByEntityID(killer)
-    			if killer ~= ped and killerid ~= nil and NetworkIsPlayerActive(killerid) then killerid = GetPlayerServerId(killerid)
-    			else killerid = -1
-    			end
+      			local killerid = GetPlayerByEntityID(killer)
+      			if killer ~= ped and killerid ~= nil and NetworkIsPlayerActive(killerid) then killerid = GetPlayerServerId(killerid)
+      			else killerid = -1
+      			end
 
-          local killerCoords = {round(GetEntityCoords(killer).x,3), round(GetEntityCoords(killer).y,3), round(GetEntityCoords(killer).z,3)}
-          local targetCoords = {round(GetEntityCoords(ped).x,3), round(GetEntityCoords(ped).y,3), round(GetEntityCoords(ped).z,3)}
-          if((killerid==-1 and config.LogPnjKills) or (killerid~=-1 and config.LogKills)) then
-            TriggerServerEvent("logs:addKill", killerid, GetPlayerServerId(player), killerCoords, targetCoords)
+            local kCoords = GetEntityCoords(killer)
+            local tCoords = GetEntityCoords(ped)
+
+            local killerCoords = {round(kCoords.x,3), round(kCoords.y,3), round(kCoords.z,3)}
+            local targetCoords = {round(tCoords.x,3), round(tCoords.y,3), round(tCoords.z,3)}
+            if((killerid==-1 and config.LogPnjKills) or (killerid~=-1 and config.LogKills)) then
+              TriggerServerEvent("logs:addKill", killerid, GetPlayerServerId(player), killerCoords, targetCoords)
+            end
+
+            Citizen.Wait(1000)
           end
-        elseif not IsPedFatallyInjured(ped) then
-            isDead = false
+        elseif(wasDead) then
+            wasDead = false
         end
+
+
+
       end
     end
+
+
   end
 end)
 

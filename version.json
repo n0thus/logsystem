@@ -1,8 +1,8 @@
 {
-  "version":"0.0.4",
+  "version":"0.0.5",
   "patchnote" : [
-    "Added darkmode in the UI.",
-    "Added command logs (have to change the chat resource)",
-    "Added Brazilian language thanks to Sattagames"
+    "Improved communication between the server and the clients",
+    "Improved loops (12ms to 0.05/4ms)",
+    "Removing some unnecessary pieces of code"
   ]
 }
