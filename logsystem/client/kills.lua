@@ -18,6 +18,17 @@ Citizen.CreateThread(function()
             wasDead = true
 
             local killer, killerweapon = NetworkGetEntityKillerOfPlayer(player)
+
+            local killSource = GetPedSourceOfDeath(ped)
+            if killer <= 0 then
+              local entityType = GetEntityType(killSource)
+              Citizen.Trace(GetEntityType(killSource))
+              if entityType == 2 then
+                local driver = GetPedInVehicleSeat(killSource, -1)
+                killer = driver
+              end
+            end
+            
       			local killerentitytype = GetEntityType(killer)
       			local killertype = -1
 
