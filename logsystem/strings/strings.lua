@@ -12,7 +12,6 @@ local strings = {
 
     localisation = "Localisation",
 
-
     resourceContainsCapital = "The resource name for logsystem contains capital letters. It will cause some issues with the UI.",
     newestVersion = "A newest version of logsystem is available (#newVersion#)",
     upToDate = "logsystem up to date !",
@@ -31,8 +30,7 @@ local strings = {
     targetcoords = "Coordonnées de la victime",
 
     localisation = "Localisation",
-
-
+    
     resourceContainsCapital = "Le nom de la resource pour logsystem contient des majuscules. Cela causera des problemes avec l'interface.",
     newestVersion = "Une nouvelle version du logsystem est disponible (#newVersion#)",
     upToDate = "logsystem a jour !",
@@ -52,15 +50,50 @@ local strings = {
 
     localisation = "Localização",
 
-
     resourceContainsCapital = "O nome do recurso para o sistema de logs contém letras maiúsculas. Isso causará alguns problemas com a interface do usuário.",
     newestVersion = "Uma versão mais recente do sistema de logs está disponível (#newVersion#)",
     upToDate = "Sistema de logs atualizado !",
     verificationError = "logsystem : A verificação da versão falhou"
-  }
+  },
+
+  nl = {
+    connected = "Verbonden",
+    disconnected = "Verbroken",
+    disconnectedByUser = "Verbinding verbroken door gebruiker",
+    timeout = "Time-out / crash",
+    disconnectedQuitCommand = "Verbinding verbroken door F8 - quit",
+
+    pnjsuicide = "PNJ/Zelfmoord",
+    killercoords = "Moordenaar coördinaten",
+    targetcoords = "Target coördinaten",
+
+    localisation = "Localisatie",
+
+    resourceContainsCapital = "De bronnaam voor het logsystem bevat hoofdletters. Het zal enkele problemen met de gebruikersinterface veroorzaken.",
+    newestVersion = "Er is een nieuwste versie van logsystem beschikbaar (#newVersion#)",
+    upToDate = "logsystem up-to-date!",
+    verificationError = "logsystem : Verificatie van de versie is mislukt"
+  },
+
+  de = {
+    connected = "Verbunden",
+    disconnected = "Getrennt",
+    disconnectedByUser = "Vom Benutzer getrennt",
+    timeout = "Zeitüberschreitung / Absturz",
+    disconnectedQuitCommand = "Verbindung getrennt durch F8 - quit",
+
+    pnjsuicide = "PNJ/Selbstmord",
+    killercoords = "Killer Koordinaten",
+    targetcoords = "Target Koordinaten",
+
+    localisation = "Lokalisierung",
+
+    resourceContainsCapital = "Der Ressourcenname für log system enthält Großbuchstaben. Es wird einige Probleme mit der Benutzeroberfläche verursachen.",
+    newestVersion = "Eine neueste Version von logsystem ist verfügbar (#newVersion#)",
+    upToDate = "logsystem auf dem Laufenden!",
+    verificationError = "logsystem : Überprüfung der Version fehlgeschlagen"
+  },    
 }
-
-
 
 function getString(stringId, replaceArgs)
   local askedString = strings[config.language][stringId]
